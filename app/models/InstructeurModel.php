@@ -1,6 +1,6 @@
 <?php
 
-class InstructeurModel
+class InstructeurModel 
 {
     private $db;
 
@@ -11,24 +11,18 @@ class InstructeurModel
 
     public function getInstructeurs()
     {
-        $sql = "SELECT Id
-                      ,Voornaam
-                      ,Tussenvoegsel
-                      ,Achternaam
-                      ,Mobiel
-                      ,DatumInDienst
-                      ,AantalSterren
-                FROM  Instructeur
-                ORDER BY AantalSterren DESC";
+        $sql = "SELECT * FROM Instructeur ORDER BY AantalSterren DESC";
 
         $this->db->query($sql);
+
         return $this->db->resultSet();
     }
 
-    public function getToegewezenVoertuigen($Id)
+    public function getInstructeur($Id)
     {
-        $sql = "Dit wordt een mooie query!!";
+        $sql = "SELECT * FROM Instructeur WHERE Id = $Id";
+        $this->db->query($sql);
 
-        return $sql;
+        return $this->db->resultSet();
     }
 }

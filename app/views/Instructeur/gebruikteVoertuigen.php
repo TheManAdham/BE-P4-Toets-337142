@@ -9,20 +9,8 @@
 <body>
     <h3><?= $data['title']; ?></h3>
 
-    <table border='1'>
-        <thead>
-            <th>Id</th>
-            <th>Naam</th>
-        </thead>
-        <tbody>
-            <?= $data['tableRows']; ?>
-        </tbody>
-    </table>
-    <a href="http://mvc-2209a.org/">Home</a>
+    <h4>Naam: <?= $data ['naam']; ?></h4>
+    <h4>datum in dienst: <?= $data ['datum in dienst']; ?></h4>
+    <h4>Aantal sterren: <?= $data ['aantal sterren']; ?></h4>
 </body>
 </html>
-
-
-
-
-

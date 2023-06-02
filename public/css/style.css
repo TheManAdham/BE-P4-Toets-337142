@@ -3,13 +3,10 @@ body {
 }
 
 table {
-    border: 2px solid gray;
     border-collapse: collapse;
-    margin-top: 1em;
-    text-align: center;
+    margin-top: 2em;
 }
 
-th, td {
-    border: 2px solid gray;
-    padding:.2em;
-}
+td {
+    text-align: center;
+  }

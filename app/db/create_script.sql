@@ -1,5 +1,5 @@
 -- Step: 01
--- Goal: Create a new database mvc-2209a-P4
+-- Goal: Create a new database mvc-2209c-P4
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
@@ -7,14 +7,13 @@
 -- **********************************************************************************/
 
 -- Check if the database exists
-DROP DATABASE IF EXISTS `Mvc-2209a-P4`;
+DROP DATABASE IF EXISTS `Mvc-2209c-P4`;
 
 -- Create a new Database
-CREATE DATABASE IF NOT EXISTS `Mvc-2209a-P4`;
+CREATE DATABASE IF NOT EXISTS `Mvc-2209c-P4`;
 
 -- Use database Mvc-2209a-P4
-Use `Mvc-2209a-P4`;
-
+Use `Mvc-2209c-P4`;
 
 -- Step: 02
 -- Goal: Create a new table Instructeur
@@ -22,6 +21,7 @@ Use `Mvc-2209a-P4`;
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            04-04-2023      Arjan de Ruijter            New
+-- 02            13-04-2023      Arjan de Ruijter            Improved version
 -- **********************************************************************************/
 
 -- Drop table Instructeur
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Instructeur
    ,Achternaam      VARCHAR(50)                     NOT NULL
    ,Mobiel          VARCHAR(12)                     NOT NULL
    ,DatumInDienst   DATE                            NOT NULL
-   ,AantalSterren   VARCHAR(6)                      NOT NULL
+   ,AantalSterren   VARCHAR(5)                      NOT NULL
    ,IsActief        BIT                             NOT NULL    DEFAULT 1
    ,Opmerkingen     VARCHAR(250)                        NULL    DEFAULT NULL
    ,DatumAangemaakt DateTime(6)                     NOT NULL
@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS Instructeur
 -- Step: 03
 -- Goal: Fill table Instructeur with data
 -- **********************************************************************************
-
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
 -- 01            04-04-2023      Arjan de Ruijter            New
+-- 02            04-04-2023      Arjan de Ruijter            Added more records
 -- **********************************************************************************/
 
 INSERT INTO Instructeur
@@ -76,12 +76,13 @@ VALUES
 
 
 
+
 -- Step: 04
 -- Goal: Create a new table TypeVoertuig
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 -- Drop table TypeVoertuig
@@ -89,13 +90,13 @@ DROP TABLE IF EXISTS TypeVoertuig;
 
 CREATE TABLE IF NOT EXISTS TypeVoertuig
 (
-    Id                  TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
-   ,TypeVoertuig        VARCHAR(20)                     NOT NULL
-   ,Rijbewijscategorie  VARCHAR(5)                      NOT NULL
-   ,IsActief            BIT                             NOT NULL    DEFAULT 1
-   ,Opmerkingen         VARCHAR(250)                        NULL    DEFAULT NULL
-   ,DatumAangemaakt     DateTime(6)                     NOT NULL
-   ,DatumGewijzigd      DateTime(6)                     NOT NULL
+    Id                   TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
+   ,TypeVoertuig         VARCHAR(50)                     NOT NULL
+   ,Rijbewijscategorie   VARCHAR(10)                     NOT NULL
+   ,IsActief             BIT                             NOT NULL    DEFAULT 1
+   ,Opmerkingen          VARCHAR(250)                        NULL    DEFAULT NULL
+   ,DatumAangemaakt      DateTime(6)                     NOT NULL
+   ,DatumGewijzigd       DateTime(6)                     NOT NULL
 
    ,CONSTRAINT      PK_TypeVoertuig_Id   PRIMARY KEY CLUSTERED(Id)
 ) ENGINE=InnoDB;
@@ -104,10 +105,9 @@ CREATE TABLE IF NOT EXISTS TypeVoertuig
 -- Step: 05
 -- Goal: Fill table TypeVoertuig with data
 -- **********************************************************************************
-
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 INSERT INTO TypeVoertuig
@@ -121,10 +121,11 @@ INSERT INTO TypeVoertuig
 )
 VALUES
      ('Personenauto', 'B', 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('Vrachtwagen', 'C', 1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('Vrachtauto', 'C', 1, NULL, SYSDATE(6), SYSDATE(6))
     ,('Bus', 'D', 1, NULL, SYSDATE(6), SYSDATE(6))
     ,('Bromfiets', 'AM', 1, NULL, SYSDATE(6), SYSDATE(6));
-
+   
+    
 
 
 -- Step: 06
@@ -132,7 +133,7 @@ VALUES
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 -- Drop table Voertuig
@@ -140,16 +141,16 @@ DROP TABLE IF EXISTS Voertuig;
 
 CREATE TABLE IF NOT EXISTS Voertuig
 (
-    Id                  TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
-   ,Kenteken            VARCHAR(12)                     NOT NULL
-   ,Type                VARCHAR(20)                     NOT NULL
-   ,Bouwjaar            DATE                            NOT NULL
-   ,Brandstof           VARCHAR(20)                     NOT NULL  
-   ,TypeVoertuigId      TINYINT         UNSIGNED        NOT NULL  
-   ,IsActief            BIT                             NOT NULL    DEFAULT 1
-   ,Opmerkingen         VARCHAR(250)                        NULL    DEFAULT NULL
-   ,DatumAangemaakt     DateTime(6)                     NOT NULL
-   ,DatumGewijzigd      DateTime(6)                     NOT NULL
+    Id                   TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
+   ,Kenteken             VARCHAR(10)                     NOT NULL
+   ,Type                 VARCHAR(30)                     NOT NULL
+   ,Bouwjaar             DATE                            NOT NULL
+   ,Brandstof            VARCHAR(10)                     NOT NULL
+   ,TypeVoertuigId       TINYINT         UNSIGNED        NOT NULL
+   ,IsActief             BIT                             NOT NULL    DEFAULT 1
+   ,Opmerkingen          VARCHAR(250)                        NULL    DEFAULT NULL
+   ,DatumAangemaakt      DateTime(6)                     NOT NULL
+   ,DatumGewijzigd       DateTime(6)                     NOT NULL
 
    ,CONSTRAINT      PK_Voertuig_Id   PRIMARY KEY CLUSTERED(Id)
    ,CONSTRAINT      FK_Voertuig_TypeVoertuigId_TypeVoertuig_Id  FOREIGN KEY (TypeVoertuigId) REFERENCES TypeVoertuig(Id)
@@ -159,10 +160,9 @@ CREATE TABLE IF NOT EXISTS Voertuig
 -- Step: 07
 -- Goal: Fill table Voertuig with data
 -- **********************************************************************************
-
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 INSERT INTO Voertuig
@@ -188,17 +188,16 @@ VALUES
     ,('ST-FZ-28', 'Citroën', '2018-01-20', 'Elektrisch', 1, 1, NULL, SYSDATE(6), SYSDATE(6))
     ,('123-FR-T', 'Piaggio ZIP', '2021-02-01', 'Benzine', 4, 1, NULL, SYSDATE(6), SYSDATE(6))
     ,('DRS-52-P', 'Vespa', '2022-03-21', 'Benzine', 4, 1, NULL, SYSDATE(6), SYSDATE(6))
-    ,('STP-12-U', 'Vespa', '2022-07-02', 'Benzine', 4, 1, NULL, SYSDATE(6), SYSDATE(6))
+    ,('STP-12-U', 'Kymco', '2022-07-02', 'Benzine', 4, 1, NULL, SYSDATE(6), SYSDATE(6))
     ,('45-SD-23', 'Renault', '2023-01-01', 'Diesel', 3, 1, NULL, SYSDATE(6), SYSDATE(6));
-
-
-
+   
+ 
 -- Step: 08
 -- Goal: Create a new table VoertuigInstructeur
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 -- Drop table VoertuigInstructeur
@@ -206,28 +205,27 @@ DROP TABLE IF EXISTS VoertuigInstructeur;
 
 CREATE TABLE IF NOT EXISTS VoertuigInstructeur
 (
-    Id                  TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
-   ,VoertuigId          TINYINT         UNSIGNED        NOT NULL
-   ,InstructeurId       TINYINT         UNSIGNED        NOT NULL
-   ,DatumToekenning     DATE                            NOT NULL
-   ,IsActief            BIT                             NOT NULL    DEFAULT 1
-   ,Opmerkingen         VARCHAR(250)                        NULL    DEFAULT NULL
-   ,DatumAangemaakt     DateTime(6)                     NOT NULL
-   ,DatumGewijzigd      DateTime(6)                     NOT NULL
+    Id                   TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
+   ,VoertuigId           TINYINT         UNSIGNED        NOT NULL
+   ,InstructeurId        TINYINT         UNSIGNED        NOT NULL
+   ,DatumToekenning      DATE                            NOT NULL
+   ,IsActief             BIT                             NOT NULL    DEFAULT 1
+   ,Opmerkingen          VARCHAR(250)                        NULL    DEFAULT NULL
+   ,DatumAangemaakt      DateTime(6)                     NOT NULL
+   ,DatumGewijzigd       DateTime(6)                     NOT NULL
 
-   ,CONSTRAINT      PK_VoertuigInstructeur_Id   PRIMARY KEY CLUSTERED(Id)
-   ,CONSTRAINT      FK_VoertuigInstructeur_VoertuigId_Voertuig_Id  FOREIGN KEY (VoertuigId) REFERENCES Voertuig(Id)
-   ,CONSTRAINT      FK_VoertuigInstructeur_InstructeurId_Instructeur_Id  FOREIGN KEY (InstructeurId) REFERENCES Instructeur(Id)
+   ,CONSTRAINT  PK_VoertuigInstructeur_Id   PRIMARY KEY CLUSTERED(Id)
+   ,CONSTRAINT  FK_VoertuigInstructeur_VoertuigId_Voertuig_Id  FOREIGN KEY (VoertuigId) REFERENCES Voertuig(Id)
+   ,CONSTRAINT  FK_VoertuigInstructeur_InstructeurId_Instructeur_Id  FOREIGN KEY (InstructeurId) REFERENCES Instructeur(Id)
 ) ENGINE=InnoDB;
 
 
 -- Step: 09
 -- Goal: Fill table VoertuigInstructeur with data
 -- **********************************************************************************
-
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
--- 01            04-04-2023      Arjan de Ruijter            New
+-- 01            13-04-2023      Arjan de Ruijter            New
 -- **********************************************************************************/
 
 INSERT INTO VoertuigInstructeur
@@ -247,4 +245,3 @@ VALUES
     ,(3, 4, '2022-08-01', 1, NULL, SYSDATE(6), SYSDATE(6))
     ,(5, 1, '2019-08-30', 1, NULL, SYSDATE(6), SYSDATE(6))
     ,(10, 5, '2020-02-02', 1, NULL, SYSDATE(6), SYSDATE(6));
-   
